@@ -7,4 +7,4 @@ end
 use Rack::MethodOverride
 # use ArtistController
 # use UserController
-# run ApplicationController
+ run ApplicationController
