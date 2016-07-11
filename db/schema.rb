@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(version: 20160711213629) do
   end
 
   create_table "artworks", force: :cascade do |t|
-    t.string "name"
-    t.string "medium"
+    t.string  "name"
+    t.string  "medium"
+    t.integer "artist_id"
   end
 
   create_table "movements", force: :cascade do |t|
