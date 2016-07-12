@@ -93,6 +93,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/artworks/:id/show' do
+    if logged_in?
+      @artwork = Artwork.all.find(params[:id])
+      erb :'artworks/show'
+    else
+      redirect to '/login'
+    end
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]
