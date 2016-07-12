@@ -1,10 +1,24 @@
-<h1>Edit Artwork</h1>
+<% if flash.has?(:message) %>
+<%= flash[:message] %>
+<%end%>
 
 <form action="/artworks/<%= @artwork.id %>" method="POST">
   <input type="hidden" name="_method"  value="PATCH">
-  <p>Name: <input type="text" name="name" value="<%= @artwork.name %>"></p>
-  <p>Medium: <input type="text" name="medium" value="<%= @artwork.medium %>"></p>
-  <p>Movement: <input type="text" name="movement" value="<%= @artwork.movements.first.name %>"></p>
+  <p>Artwork Name: <input type="text" name="name" value="<%= @artwork.name %>"></p>
+
+  <b>Select Medium:</b>
+  <input type="radio" name="medium" value="painting" checked>Painting
+  <input type="radio" name="medium" value="sculpture">Sculpture
+  <input type="radio" name="medium" value="architecture">Architecture
+
+  <p><b>Select Existing Movement(s):</b>
+  <% Movement.all.each do |movement| %>
+  <%= movement.name %><input id="<%= movement.name %>" type="checkbox" name="movements[]"
+  value="<%= movement.id %>" <%='checked' if @artwork.movements.include?(movement) %>>
+  <% end %>
+  </p>
+
+  <p><b>Or Add New Movement:</b> <input type="text" name="movement"></p>
   <p>Artist Name: <input type="text" name="artist" value="<%= @artwork.artist.name %>"></p>
-  <p><input type="submit" value="edit artwork"></p>
+  <p><input type="submit" value="Edit Artwork"></p>
 </form>
