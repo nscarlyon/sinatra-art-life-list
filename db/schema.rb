@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160711213629) do
     t.string  "name"
     t.string  "medium"
     t.integer "artist_id"
+    t.integer "user_id"
   end
 
   create_table "movements", force: :cascade do |t|
