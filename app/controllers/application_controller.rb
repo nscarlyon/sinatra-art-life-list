@@ -32,7 +32,7 @@ class ApplicationController < Sinatra::Base
 
   post '/signup' do
     user = User.create(username: params[:username], password: params[:password])
-    
+
     if user.username != "" && user.password != "" && user.save
       session[:user_id] = user.id
       redirect to "/artworks"
@@ -40,6 +40,10 @@ class ApplicationController < Sinatra::Base
       flash[:message] = "You did not enter a valid username and/or password. Please try again."
       redirect to "/signup"
     end
+  end
+
+  get '/login' do
+    erb :'users/login'
   end
 
 
