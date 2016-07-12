@@ -42,9 +42,18 @@ class ApplicationController < Sinatra::Base
       flash[:message] = "You did not enter a valid artwork name. Please try again."
       redirect to "/artworks/new"
     end
+    artwork.movement_ids = params["movements"]
 
-    artwork.artist = Artist.find_or_create_by(name: params["artist"])
-    artwork.movements << Movement.create(name: params["movement"])
+    if params["movement"] != ""
+      artwork.movements << Movement.find_or_create_by(name: params["movement"])
+    end
+
+    artwork.artist_id = params["artists"]
+
+    if params["artist"] != ""
+      artwork.artist = Artist.find_or_create_by(name: params["artist"])
+    end
+
     current_user.artworks << artwork
     current_user.save
      flash[:message] = "Successfully added artwork."
