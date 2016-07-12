@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   has_many :artworks
+  has_many :artists
+  has_many :movements
+  has_many :artwork_movements
   has_secure_password
 
   def slug
