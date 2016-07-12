@@ -1,20 +1,25 @@
 <h1>Add New Artwork to List</h1>
 <form action="/artworks" method="POST">
-  <p>Artwork Name: <input type="text" name="name"></p>
-  <p>Artwork Medium: <input type="text" name="medium"></p>
+  <p><b>Artwork Name:</b> <input type="text" name="name"></p>
 
-  <p>Movements</p>
+    <b>Select Medium:</b>
+    <input type="radio" name="medium" value="painting" checked>Painting
+    <input type="radio" name="medium" value="sculpture">Sculpture
+    <input type="radio" name="medium" value="architecture">Architecture
+
+  <p><b>Select Existing Movement(s):</b>
   <% Movement.all.each do |movement| %>
   <%= movement.name %><input id="<%= movement.name %>" type="checkbox" name="movements[]" value="<%= movement.id %>">
   <% end %>
+</p>
 
-  <p>Artists</p>
+  <p><b>Or Add New Movement:</b> <input type="text" name="movement"></p>
+
+  <p><b>Select Artist:</b></p>
   <% Artist.all.each do |artist| %>
-  <%= artist.name %><input id="<%= artist.name %>" type="checkbox" name="artists[]" value="<%= artist.id %>">
+  <p><%= artist.name %><input id="<%= artist.name %>" type="radio" name="artists[]" value="<%= artist.id %>"></p>
   <% end %>
+  <p>New Artist <input type = "radio" name="artists[]" value=""> <b>Artist Name:</b></b><input type="text" name="artist"></p>
 
-  <p>Create New Movement and/or Artist</p>
-  <p>Movement Name: <input type="text" name="movement"></p>
-  <p>Artist Name: <input type="text" name="artist"></p>
   <p><input type="submit" value="submit"></p>
 </form>

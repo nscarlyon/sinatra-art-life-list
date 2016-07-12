@@ -36,7 +36,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/artworks' do
-    artwork = Artwork.new(name: params["name"], medium: params["medium"])
+    if !params["name"] && !params["medium"]
+      artwork = Artwork.new(name: params["name"], medium: params["medium"])
+    end
+
     artwork.artist = Artist.find_or_create_by(name: params["artist"])
     artwork.movements << Movement.create(name: params["movement"])
     current_user.artworks << artwork
