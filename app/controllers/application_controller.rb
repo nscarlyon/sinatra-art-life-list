@@ -140,6 +140,16 @@ class ApplicationController < Sinatra::Base
       redirect to "/artworks/#{@artwork.id}"
   end
 
+  delete '/artworks/:id' do
+    artwork = Artwork.find_by_id(params[:id])
+    if logged_in? && artwork.user_id == current_user.id
+      artwork.delete
+      redirect to "/artworks"
+    else
+      redirect to '/login'
+    end
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]
