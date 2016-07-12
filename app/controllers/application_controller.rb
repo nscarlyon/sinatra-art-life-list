@@ -19,11 +19,25 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/artworks' do
-    erb :'users/artworks'
+    if logged_in?
+      erb :'users/artworks'
+    else
+      redirect to "/login"
+    end
   end
 
   get '/artworks/new' do
     erb :'artworks/new'
+  end
+
+  post '/artworks' do
+    artwork = Artwork.new(name: params["name"], medium: params["medium"])
+    artwork.artist = Artist.find_or_create_by(name: params["artist"])
+    artwork.movements << Movement.create(name: params["movement"])
+    current_user.artworks << artwork
+    current_user.save
+    # flash[:message] = "Successfully added artwork."
+    redirect to "/artworks"
   end
 
   get '/signup' do
@@ -57,6 +71,7 @@ class ApplicationController < Sinatra::Base
   post '/login' do
     user = User.find_by(username: params["username"])
     if user && user.authenticate(params["password"])
+      session[:user_id] = user.id
       redirect to "/artworks"
     else
       flash[:message] = "You did not enter a valid username and/or password. Please try again."
