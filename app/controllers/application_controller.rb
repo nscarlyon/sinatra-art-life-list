@@ -111,6 +111,14 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  patch '/artworks/:id' do
+    @artwork = Artwork.find_by(id: params[:id])
+    @artwork.name = params["name"]
+    @artwork.medium = params["medium"]
+    @artwork.artist = params["artist"]
+    @artwork.save
+      redirect to "/artworks/#{@artwork.id}"
+  end
 
   helpers do
     def logged_in?
