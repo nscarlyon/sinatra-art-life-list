@@ -1,13 +1,17 @@
 require 'pry'
 require './config/environment'
 require "./app/models/user"
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
+    register Sinatra::ActiveRecordExtension
+    use Rack::Flash
 
   configure do
+    set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "password_security"
+    set :session_secret, "artlifelist"
   end
 
   get '/' do
@@ -15,11 +19,23 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/artworks' do
-    erb :'/artworks/index'
+    erb :'artworks/index'
   end
 
   get '/signup' do
     erb :'users/create_user'
+  end
+
+  post '/signup' do
+    user = User.create(username: params[:username], password: params[:password])
+
+    if user.username != "" && user.password != "" && user.save
+      session[:user_id] = user.id
+      redirect to "/artworks"
+    else
+      flash[:message] = "You did not enter a valid username and/or password. Please try again."
+      redirect to "/signup"
+    end
   end
 
   helpers do
