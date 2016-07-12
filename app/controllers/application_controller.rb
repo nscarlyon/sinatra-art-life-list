@@ -43,7 +43,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :'users/login'
+    if logged_in?
+      redirect to "/artworks"
+    else
+      erb :'users/login'
+    end
   end
 
   post '/login' do
@@ -53,6 +57,15 @@ class ApplicationController < Sinatra::Base
     else
       flash[:message] = "You did not enter a valid username and/or password. Please try again."
       redirect to "/login"
+    end
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect to "/login"
+    else
+      redirect to "/"
     end
   end
 
