@@ -1,5 +1,15 @@
 <h1>Welcome, <%= @user.username %></h1>
 
 <% @user.artworks.each do |artwork| %>
-<%= artwork.name %>
+  <ol>
+    <li><b>Artwork Name:</b> <%= artwork.name %></li>
+    <p><b>Artwork Medium:</b> <%= artwork.medium %></p>
+    <p><b>Artwork Artist:</b> <%= artwork.artist.name %></p>
+
+    <p><b>Artwork Movements:</b>
+    <% artwork.movements.each do |movement| %>
+    <%= movement.name %>
+    <%end%>
+    </p>
+  </ol>
 <%end%>
