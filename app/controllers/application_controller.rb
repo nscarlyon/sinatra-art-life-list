@@ -129,7 +129,13 @@ class ApplicationController < Sinatra::Base
     @artwork = Artwork.find_by(id: params[:id])
     @artwork.name = params["name"]
     @artwork.medium = params["medium"]
-    @artwork.artist = params["artist"]
+    @artwork.movement_ids = params["movements"]
+    @artwork.artist = Artist.find_or_create_by(name: params["artist"])
+
+    if !params["movement"].empty?
+      @artwork.movements << Movement.find_or_create_by(name: params["movement"])
+    end
+
     @artwork.save
       redirect to "/artworks/#{@artwork.id}"
   end
