@@ -19,7 +19,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/artworks' do
-    erb :'artworks/index'
+    erb :'users/artworks'
+  end
+
+  get '/artworks/new' do
+    erb :'artworks/new'
   end
 
   get '/signup' do
