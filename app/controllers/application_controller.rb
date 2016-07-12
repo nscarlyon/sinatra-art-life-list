@@ -36,28 +36,27 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/artworks' do
-    if params["name"] != ""
-      artwork = Artwork.new(name: params["name"], medium: params["medium"])
+    if params["name"] != "" && params["artist"] != ""
+      if !params["movement"].empty? && !params["movements"].empty?
+        artwork = Artwork.new(name: params["name"], medium: params["medium"])
+        artwork.artist = Artist.find_or_create_by(name: params["artist"])
+        artwork.movement_ids = params["movements"]
+          if params["movement"] != ""
+            artwork.movements << Movement.find_or_create_by(name: params["movement"])
+          end
+      else
+        flash[:message] = "You did not enter a valid artwork movement. Please try again."
+        redirect to "/artworks/new"
+      end
     else
-      flash[:message] = "You did not enter a valid artwork name. Please try again."
+      flash[:message] = "You did not enter a valid artwork name and/or artist name. Please try again."
       redirect to "/artworks/new"
-    end
-    artwork.movement_ids = params["movements"]
-
-    if params["movement"] != ""
-      artwork.movements << Movement.find_or_create_by(name: params["movement"])
-    end
-
-    artwork.artist_id = params["artists"]
-
-    if params["artist"] != ""
-      artwork.artist = Artist.find_or_create_by(name: params["artist"])
     end
 
     current_user.artworks << artwork
     current_user.save
      flash[:message] = "Successfully added artwork."
-    redirect to "/artworks"
+     redirect to "/artworks"
   end
 
   get '/signup' do

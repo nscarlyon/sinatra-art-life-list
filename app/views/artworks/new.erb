@@ -19,11 +19,7 @@
 
   <p><b>Or Add New Movement:</b> <input type="text" name="movement"></p>
 
-  <p><b>Select Artist:</b></p>
-  <% Artist.all.each do |artist| %>
-  <p><%= artist.name %><input id="<%= artist.name %>" type="radio" name="artists[]" value="<%= artist.id %>"></p>
-  <% end %>
-  <p>New Artist <input type = "radio" name="artists[]" value=""> <b>Artist Name:</b></b><input type="text" name="artist"></p>
+  <p><b>Artist Name:</b>  <input type="text" name="artist"></p>
 
   <p><input type="submit" value="submit"></p>
 </form>
