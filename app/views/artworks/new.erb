@@ -1,8 +1,20 @@
 <h1>Add New Artwork to List</h1>
 <form action="/artworks" method="POST">
-  <p>Name: <input type="text" name="name"></p>
-  <p>Medium: <input type="text" name="medium"></p>
-  <p>Movement: <input type="text" name="movement"></p>
+  <p>Artwork Name: <input type="text" name="name"></p>
+  <p>Artwork Medium: <input type="text" name="medium"></p>
+
+  <p>Movements</p>
+  <% Movement.all.each do |movement| %>
+  <%= movement.name %><input id="<%= movement.name %>" type="checkbox" name="movements[]" value="<%= movement.id %>">
+  <% end %>
+
+  <p>Artists</p>
+  <% Artist.all.each do |artist| %>
+  <%= artist.name %><input id="<%= artist.name %>" type="checkbox" name="artists[]" value="<%= artist.id %>">
+  <% end %>
+
+  <p>Create New Movement and/or Artist</p>
+  <p>Movement Name: <input type="text" name="movement"></p>
   <p>Artist Name: <input type="text" name="artist"></p>
   <p><input type="submit" value="submit"></p>
 </form>
