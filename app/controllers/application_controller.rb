@@ -20,6 +20,7 @@ class ApplicationController < Sinatra::Base
 
   get '/artworks' do
     if logged_in?
+      @user = current_user
       erb :'users/artworks'
     else
       redirect to "/login"
@@ -27,7 +28,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/artworks/new' do
-    erb :'artworks/new'
+    if logged_in?
+      erb :'artworks/new'
+    else
+      redirect to "/login"
+    end
   end
 
   post '/artworks' do
