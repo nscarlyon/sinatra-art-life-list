@@ -41,7 +41,7 @@ class ApplicationController < Sinatra::Base
     artwork.movements << Movement.create(name: params["movement"])
     current_user.artworks << artwork
     current_user.save
-    # flash[:message] = "Successfully added artwork."
+     flash[:message] = "Successfully added artwork."
     redirect to "/artworks"
   end
 

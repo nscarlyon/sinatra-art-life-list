@@ -1,5 +1,9 @@
 <h1>Welcome, <%= @user.username %></h1>
 
+<% if flash.has?(:message) %>
+<%= flash[:message] %>
+<%end%>
+
 <ol>
 <% @user.artworks.each do |artwork| %>
     <li><b>Artwork Name:</b> <%= artwork.name %></li>
