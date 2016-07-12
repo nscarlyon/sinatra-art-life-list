@@ -1,7 +1,7 @@
 <h1>Welcome, <%= @user.username %></h1>
 
+<ol>
 <% @user.artworks.each do |artwork| %>
-  <ol>
     <li><b>Artwork Name:</b> <%= artwork.name %></li>
     <p><b>Artwork Medium:</b> <%= artwork.medium %></p>
     <p><b>Artwork Artist:</b> <%= artwork.artist.name %></p>
@@ -11,5 +11,5 @@
     <%= movement.name %>
     <%end%>
     </p>
-  </ol>
 <%end%>
+</ol>
