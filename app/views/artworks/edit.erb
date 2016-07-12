@@ -1,0 +1,10 @@
+<h1>Edit Artwork</h1>
+
+<form action="/artworks/<%= @artwork.id %>" method="POST">
+  <input type="hidden" name="_method"  value="PATCH">
+  <p>Name: <input type="text" name="name" value="<%= @artwork.name %>"></p>
+  <p>Medium: <input type="text" name="medium" value="<%= @artwork.medium %>"></p>
+  <p>Movement: <input type="text" name="movement" value="<%= @artwork.movements.first.name %>"></p>
+  <p>Artist Name: <input type="text" name="artist" value="<%= @artwork.artist.name %>"></p>
+  <p><input type="submit" value="edit artwork"></p>
+</form>
