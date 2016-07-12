@@ -46,7 +46,15 @@ class ApplicationController < Sinatra::Base
     erb :'users/login'
   end
 
-
+  post '/login' do
+    user = User.find_by(username: params[:username])
+    if user && user.authenticate(params[:password])
+      redirect to "/artworks"
+    else
+      flash[:message] = "You did not enter a valid username and/or password. Please try again."
+      redirect to "/login"
+    end
+  end
 
   helpers do
     def logged_in?
