@@ -4,6 +4,13 @@
 
 <p><b>Artwork Movements:</b>
 <% @artwork.movements.each do |movement| %>
-<%= movement.name %>
+<%= movement.name %><br>
 <%end%>
 </p>
+
+<a href="/artworks/<%= @artwork.id %>/edit">Edit Artwork</a>
+
+<form action="/artworks/<%= @artwork.id %>" method="POST">
+  <input type="hidden" name="_method"  value="Delete">
+  <p><input type="submit" value="Delete Artwork"></p>
+</form>
