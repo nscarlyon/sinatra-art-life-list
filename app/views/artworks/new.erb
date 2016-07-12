@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+<%= flash[:message] %>
+<%end%>
+
 <h1>Add New Artwork to List</h1>
 <form action="/artworks" method="POST">
   <p><b>Artwork Name:</b> <input type="text" name="name"></p>

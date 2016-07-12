@@ -36,8 +36,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/artworks' do
-    if !params["name"] && !params["medium"]
+    if params["name"] != ""
       artwork = Artwork.new(name: params["name"], medium: params["medium"])
+    else
+      flash[:message] = "You did not enter a valid artwork name. Please try again."
+      redirect to "/artworks/new"
     end
 
     artwork.artist = Artist.find_or_create_by(name: params["artist"])
