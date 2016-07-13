@@ -5,18 +5,20 @@
 <%end%>
 
 <a href = "artworks/new"><p>Add artwork to list</p></a>
+Click on artwork name to edit artwork.
 
 <h3>Art Life List</h3>
 <ol>
 <% @user.artworks.each do |artwork| %>
-    <li><b>Artwork Name:</b> <%= artwork.name %></li>
+    <p><li><b>Artwork Name:</b> <a href="/artworks/<%= artwork.id %>"><%= artwork.name %></a></li></p>
     <p><b>Artwork Medium:</b> <%= artwork.medium %></p>
     <p><b>Artwork Artist:</b> <%= artwork.artist.name %></p>
 
-    <p><b>Artwork Movements:</b>
-    <% artwork.movements.each do |movement| %>
-    <%= movement.name %>
-    <%end%>
-    </p>
+    <b>Artwork Movements</b><br>
+    <ul>
+      <% artwork.movements.each do |movement| %>
+      <li><%= movement.name %></li>
+      <%end%>
+    </ul>
 <%end%>
 </ol>

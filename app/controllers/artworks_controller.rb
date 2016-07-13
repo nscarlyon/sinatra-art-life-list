@@ -24,7 +24,7 @@ class ArtworksController < ApplicationController
         artwork.artist = Artist.find_or_create_by(name: params["artist"])
         artwork.movement_ids = params["movements"]
           if params["movement"] != ""
-            artwork.movements << Movement.find_or_create_by(name: params["movement"])
+            artwork.movements << Movement.find_or_create_by(name: params["movement"].capitalize)
           end
       else
         flash[:message] = "You did not enter a valid artwork movement. Please try again."

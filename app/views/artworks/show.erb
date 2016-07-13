@@ -2,13 +2,14 @@
 <p><b>Artwork Medium:</b> <%= @artwork.medium %></p>
 <p><b>Artwork Artist:</b> <%= @artwork.artist.name %></p>
 
-<p><b>Artwork Movements:</b>
+<b>Artwork Movements</b><br>
+<ul>
 <% @artwork.movements.each do |movement| %>
-<%= movement.name %><br>
-<%end%>
-</p>
+  <li><%= movement.name %></li>
+  <%end%>
+</ul>
 
-<a href="/artworks/<%= @artwork.id %>/edit">Edit Artwork</a>
+<p><a href="/artworks/<%= @artwork.id %>/edit">Edit Artwork</a></p>
 
 <form action="/artworks/<%= @artwork.id %>" method="POST">
   <input type="hidden" name="_method"  value="Delete">
