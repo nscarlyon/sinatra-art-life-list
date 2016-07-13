@@ -1,9 +1,10 @@
+
+<h3>Artworks</h3>
 <% @artist.artworks.each do |artwork| %>
-<p>Artwork Name: <%= artwork.name %> </p>
-<p><a href='/artworks/<%= artwork.id %>'>Link to artwork</a></p>
+<p><a href='/artworks/<%= artwork.id %>'><%= artwork.name %></a></p>
 <%end%>
 
+<h3>Movements</h3>
 <% @artist.movements.each do |movement| %>
-<p>Artist's Movements: <%= movement.name %></p>
-<p><a href='/movements/<%= movement.slug %>'>Link to movement</a></p>
+<p><a href='/movements/<%= movement.slug %>'><%= movement.name %></a></p>
 <%end%>

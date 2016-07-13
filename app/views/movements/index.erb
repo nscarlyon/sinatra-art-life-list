@@ -1,6 +1,7 @@
+
+<h3>List of Movements</h3>
 <% Movement.all.each do |m| %>
 
-<p>Movement:<%= m.name %></p>
-<p><a href='/movements/<%= m.slug %>'>Link to movement</a></p>
+<p><a href='/movements/<%= m.slug %>'><%= m.name %></a></p>
 
 <%end%>
