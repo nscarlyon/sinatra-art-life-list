@@ -43,11 +43,13 @@ class ArtworksController < ApplicationController
 
 
     get '/artworks/:id' do
-      if logged_in?
-        @artwork = Artwork.find_by(id: params[:id])
+      @artwork = current_user.artworks.find_by(id: params[:id])
+
+      if logged_in? && @artwork != nil
         erb :'artworks/show'
       else
-        redirect to '/login'
+        flash[:message] = "The artwork does not exist."
+        redirect to '/artworks'
       end
     end
 
