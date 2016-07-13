@@ -5,6 +5,6 @@
 <%end%>
 
 <h3>Artists</h3>
-<% @movement.artists.each do |movement| %>
-<p><a href='/movements/<%= movement.slug %>'><%= movement.name %></a></p>
+<% @movement.artists.each do |artist| %>
+<p><a href='/artists/<%= artist.slug %>'><%= artist.name %></a></p>
 <%end%>

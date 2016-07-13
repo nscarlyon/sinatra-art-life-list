@@ -43,22 +43,23 @@ class ArtworksController < ApplicationController
 
 
     get '/artworks/:id' do
-      @artwork = current_user.artworks.find_by(id: params[:id])
 
-      if logged_in? && @artwork != nil
+      if logged_in?
+        @artwork = Artwork.find_by(id: params[:id])
         erb :'artworks/show'
       else
-        flash[:message] = "The artwork does not exist."
-        redirect to '/artworks'
+        redirect to '/login'
       end
     end
 
     get '/artworks/:id/edit' do
-      if logged_in?
-        @artwork = Artwork.find_by(id: params[:id])
+      @artwork = current_user.artworks.find_by(id: params[:id])
+
+      if @artwork != nil
         erb :'artworks/edit'
       else
-        redirect to '/login'
+        flash[:message] = "You cannot edit this artwork."
+        redirect to '/artworks'
       end
     end
 
@@ -83,7 +84,8 @@ class ArtworksController < ApplicationController
         artwork.delete
         redirect to "/artworks"
       else
-        redirect to '/login'
+        flash[:message] = "You cannot delete this artwork"
+        redirect to '/artworks'
       end
     end
 
