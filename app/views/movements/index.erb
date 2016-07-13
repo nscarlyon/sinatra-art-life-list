@@ -1,1 +1,6 @@
-Movements Index
+<% Movement.all.each do |m| %>
+
+<p>Movement:<%= m.name %></p>
+<p><a href='/movements/<%= m.slug %>'>Link to movement</a></p>
+
+<%end%>
