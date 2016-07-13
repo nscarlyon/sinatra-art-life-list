@@ -19,7 +19,7 @@ class ArtworksController < ApplicationController
 
   post '/artworks' do
     if params["name"] != "" && params["artist"] != ""
-      if !params["movement"].empty? && !params["movements"].empty?
+      if params["movement"] != "" || !params["movements"].empty?
         artwork = Artwork.new(name: params["name"], medium: params["medium"])
         artwork.artist = Artist.find_or_create_by(name: params["artist"])
         artwork.movement_ids = params["movements"]
