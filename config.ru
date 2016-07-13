@@ -1,10 +1,12 @@
 require './config/environment'
-
-if ActiveRecord::Migrator.needs_migration?
-  raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
-end
+require 'sinatra/base'
+require_relative 'app/controllers/artists_controller'
+require_relative 'app/controllers/artworks_controller'
+require_relative 'app/controllers/movements_controller'
+require_relative 'app/controllers/application_controller'
 
 use Rack::MethodOverride
-# use ArtistController
-# use UserController
- run ApplicationController
+use MovementsController
+use ArtistsController
+use ArtworksController
+run ApplicationController
